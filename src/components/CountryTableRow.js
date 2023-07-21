@@ -10,7 +10,10 @@ export default function CountryTableRow(props) {
   );
 }
 
-
+/*
+//
+// Below is the equivalent Class based React component.
+//
 export class CountryTableRowComponent extends react.Component {
   contructor(props) {
   }
@@ -26,3 +29,4 @@ export class CountryTableRowComponent extends react.Component {
       );
   }
 }
+*/
