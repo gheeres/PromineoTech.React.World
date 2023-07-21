@@ -1,9 +1,14 @@
 import './App.css';
+import CountryTable from './components/CountryTable.js';
 
-export default function App() {
+function App() {
   return (
     <>
-    Around the world... so many countries... so many languages!
+      <h1>Around the world... so many countries... so many languages.</h1>
+
+      <CountryTable />
     </>
   );
 }
+
+export default App;
