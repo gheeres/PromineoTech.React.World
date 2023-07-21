@@ -2,19 +2,8 @@
 import { useState, useEffect } from 'react';
 import CountryTableRow from './CountryTableRow';
 
-const baseUrl = `http://localhost:3000`;
-
 export default function CountryTable(props) {
-  //const [ a, b ] = [ 1, 2, 3, 4 ];
-  const [ countries, setCountries ] = useState( [] );
-  useEffect(() => {
-    //let countries = [];
-    let url = `${ baseUrl }/countries`;
-    fetch(url).then(res => res.json()).then(data => {
-      //console.log(data);
-      setCountries(data);
-    });
-  }, [ ]);
+  let countries = props.countries || [];
 
   let rows = countries.map((country,index) => {
     return(
@@ -22,7 +11,7 @@ export default function CountryTable(props) {
     );
   });
   return (
-    <table style={ { border: 'solid 1px #000', width: '100%' } }>
+    <table className="table table-striped table-hover mt-2">
       <thead>
         <tr>
           <th>Code</th>
