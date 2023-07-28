@@ -3,9 +3,9 @@ export default function CityTable(props) {
 
   let rows = cities.map((city,index) => {
     return (
-      <tr key={ city.city_id }>
-        <td>{ city.city_name }</td>
-        <td>{ city.latitude }, { city.longitude }</td>
+      <tr key={ city.id }>
+        <td>{ city.name }</td>
+        <td>{ city.location?.latitude }, { city.location?.longitude }</td>
         <td>{ city.population } </td>
       </tr>
     );

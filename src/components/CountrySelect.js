@@ -6,6 +6,7 @@ const service = new WorldService();
 
 export default function CountrySelect(props) {
   const id = props.id || 'country-select';  
+  let selectedCountry = props.country;
   const [ countries, setCountries ] = useState(props.countries || []);
   let disabled = props.disabled || false;
 
@@ -27,12 +28,14 @@ export default function CountrySelect(props) {
 
   let options = countries.map((country,index) => {
     return(
-      <option key={ country.country_code } value={ country.country_code }>{ country.country_name }</option>
+      <option key={ country.country_code }
+              value={ country.country_code }>{ country.country_name }</option>
     );
   });
 
+  console.log(selectedCountry);
   return(
-    <select id={ id  } onChange={ handleOnChange } className="form-select mt-2" disabled={ disabled }>
+    <select id={ id  } value={ selectedCountry } onChange={ handleOnChange } className="form-select mt-2" disabled={ disabled }>
       <option value="">Select country...</option>
       { options }
     </select> 

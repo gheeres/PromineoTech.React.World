@@ -5,7 +5,7 @@ export default function CountryTableRow(props) {
   return (
     <tr key={ country.country_code }>
       <td>{ country.country_code }</td>
-      <td>{ country.country_name }</td>
+      <td><a href={ `/countries/${ country.country_code }` }>{ country.country_name }</a></td>
     </tr>
   );
 }
