@@ -5,8 +5,11 @@ const service = new WorldService();
 
 export default function CountrySelect(props) {
   const [ countries, setCountries ] = useState(props.countries || []);
+  const country = props.country;
+
   useEffect(() => {
     if (! countries.length) {
+      //console.log(`CountrySelect.getAllCountries(): Loading Data...`);
       service.getAllCountries().then(data => {
         setCountries(data);
       });  
@@ -21,6 +24,7 @@ export default function CountrySelect(props) {
 
   function handleChange(e) {
     const country = e.target.value;
+    //console.log(`CountrySelect.handleChange(${ country })`, e);
     if (country) {
       if (props.onCountrySelect) {
         props.onCountrySelect(country, e);
@@ -29,7 +33,7 @@ export default function CountrySelect(props) {
   }
 
   return(
-    <select className="form-select" onChange={ handleChange }>
+    <select className="form-select" onChange={ handleChange } value={ country }>
       { options }
     </select>
   );

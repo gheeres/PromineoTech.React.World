@@ -1,0 +1,73 @@
+{
+  "buildings": [
+    {
+      "id": 1,
+      "name": "Central Park 'n Ride"
+    },
+    {
+      "id": 2,
+      "name": "East Avenue"
+    },
+    {
+      "id": 3,
+      "name": "Jefferson Inn Ramp"
+    },
+    {
+      "id": 4
+    },
+    {
+      "name": "George's Abode",
+      "id": 5
+    }
+  ],
+  "parking": [
+    {
+      "id": "A100",
+      "buildingId": 1,
+      "occupant": null
+    },
+    {
+      "id": "A101",
+      "buildingId": 1,
+      "occupant": {
+        "state": "WI",
+        "plate": "AVP 6421"
+      }
+    },
+    {
+      "id": "A201",
+      "buildingId": 1,
+      "occupant": null
+    },
+    {
+      "id": "A202",
+      "buildingId": 1,
+      "occupant": null
+    },
+    {
+      "id": "B300",
+      "buildingId": 2,
+      "occupant": {
+        "state": "AZ",
+        "plate": "RAD MOBLE"
+      }
+    }
+  ],
+  "occupants": [
+    {
+      "state": "WI",
+      "plate": "AVP 6431",
+      "parkingId": "A200"
+    },
+    {
+      "state": "IL",
+      "plate": "AD 343-34",
+      "parkingId": "A100"
+    },
+    {
+      "state": "AZ",
+      "plate": "RAD MOBLE",
+      "parkingId": "B300"
+    }
+  ]
+}

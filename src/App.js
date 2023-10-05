@@ -1,30 +1,37 @@
-import { useState, useEffect } from 'react';
 import './App.css';
-import WorldService from './services/WorldService';
-import CountryTable from './components/CountryTable';
-import CountrySelect from './components/CountrySelect';
+import { 
+  BrowserRouter as Router, 
+  Routes, Route 
+} from 'react-router-dom';
+import Home from './pages/Home';
+import Countries from './pages/Countries';
+import Country from './pages/Country';
+import Cities from './pages/Cities';
+import City from './pages/City';
+import Languages from './pages/Languages';
+import Language from './pages/Language';
 
-const service = new WorldService();
 
 export default function App() {
-  const [ countries, setCountries ] = useState([]);
-  useEffect(() => {
-    service.getAllCountries().then((data) => {
-      //console.log(data);
-      setCountries(data);
-    });
-  }, []);
-
-  function handleCountrySelect(country, e) {
-    if (country) {
-      console.log(`SELECTED: ${ country }`);
-    }
-  }
   return (
     <>
-      <p>Around the world... so many countries... so many languages!</p>
-      <CountrySelect countries={ countries } onCountrySelect={ handleCountrySelect } />
-      <CountryTable countries={ countries } />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={ <Home /> } />
+          <Route path="/countries">
+            <Route index element={ <Countries /> } />
+            <Route path=":country_code" element={ <Country /> } />
+          </Route>
+          <Route path="/cities">
+            <Route index element={ <Cities /> } />
+            <Route path=":city_id" element={ <City /> } />
+          </Route>
+          <Route path="/languages">
+            <Route index element={ <Languages /> } />
+            <Route path=":language_code" element={ <Language /> } />
+          </Route>
+        </Routes>
+      </Router>
     </>
   );
 }
