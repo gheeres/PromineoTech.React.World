@@ -17,7 +17,8 @@ export default function CountrySelect(props) {
   }
 
   return(
-    <select className="form-select" defaultValue={ currentCountry } onChange={ handleChange }>
+    <select className="form-select" defaultValue={ currentCountry }
+                                    onChange={ handleChange }>
       <option>Select a country.</option>
       { options }
     </select>
