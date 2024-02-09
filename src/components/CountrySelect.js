@@ -3,8 +3,8 @@ export default function CountrySelect(props) {
   const countries = props.countries || [];
   const options = countries.map((country) => {
     return(
-      <option key={ country.country_code } value={ country.country_code }>
-        { country.country_name }
+      <option key={ country.code } value={ country.code }>
+        { country.name }
       </option>
     );
   });

@@ -2,10 +2,10 @@ export default function CityTable(props) {
   let cities = props.cities || [];
   const rows = cities.map((city) => {
     return (
-      <tr key={ city.city_id }>
-        <td>{ city.city_name }</td>
-        <td>{ city.city_population }</td>
-        <td>{ city.latitude }, { city.longitude }</td>
+      <tr key={ city.id }>
+        <td>{ city.name }</td>
+        <td>{ city.population?.toLocaleString() }</td>
+        <td>{ city.location.latitude }, { city.location.longitude }</td>
       </tr>  
     );
   });

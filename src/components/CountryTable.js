@@ -1,45 +1,14 @@
-import React from 'react';
-
-class CountryTableClass extends React.Component {
-  constructor(props) {
-    super(props);
-  } 
-
-  render() {
-    const items = this.props.countries.map((country) => {
-      return (
-        <tr key={ country.country_code }>
-          <td>{ country.country_code }</td>  
-          <td>{ country.country_name }</td>  
-          <td>{ country.country_population }</td>  
-        </tr>
-      );
-    });
-
-    return(
-      <table className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Population</th>
-          </tr>
-        </thead>
-        <tbody>
-          { items }
-        </tbody>
-      </table>
-    );
-  }
-}
+import { Link } from 'react-router-dom';
 
 export default function CountryTable(props) {
-  const items = props.countries.map((country) => {
+  const countries = props.countries || [];
+
+  const rows = countries.map((country) => {
     return (
-      <tr key={ country.country_code }>
-        <td>{ country.country_code }</td>  
-        <td>{ country.country_name }</td>  
-        <td>{ country.country_population }</td>  
+      <tr key={ country.code }>
+        <td>{ country.code }</td>  
+        <td><Link to={ `/countries/${ country.code }` }>{ country.name }</Link></td>  
+        <td>{ country.population?.toLocaleString() }</td>  
       </tr>
     );
   });
@@ -54,7 +23,7 @@ export default function CountryTable(props) {
        </tr>
      </thead>
      <tbody>
-       { items }
+       { rows }
      </tbody>
    </table>
   );
