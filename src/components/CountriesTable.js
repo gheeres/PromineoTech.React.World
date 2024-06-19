@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function CountriesTable(props) {
   console.log(`CountriesTable.render()`);
   let countries = props.countries || [];
@@ -19,7 +21,7 @@ export default function CountriesTable(props) {
     return (
       <tr key={ country.country_code } data-country={ country.country_code }>
         <td>{ country.country_code }</td>
-        <td>{ country.country_name }</td>
+        <td><Link to={ `/countries/${ country.country_code }` }>{ country.country_name }</Link></td>
         <td>{ country.continent }</td>
         <td>{ country.country_population.toLocaleString() }</td>
         <td><i className="bi bi-trash-fill text-danger" onClick={ handleDelete }></i></td>

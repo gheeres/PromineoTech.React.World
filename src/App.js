@@ -1,29 +1,25 @@
-import { useEffect, useState } from 'react';
 import './App.css';
-import CountriesTable from './components/CountriesTable';
-import WorldService from './services/WorldService';
-
-let service = new WorldService();
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Countries from './pages/Countries';
+import Country from './pages/Country';
+import Cities from './pages/Cities';
+import Languages from './pages/Languages';
 
 export default function App() {
-  const [ countries, setCountries ] = useState([]);
-
-  useEffect(() => {
-    service.allCountries().then(countries => {
-      setCountries(countries);
-    });
-  }, [ ]);
-  
-  function handleDelete(country, e) {
-    if (country) {
-      console.log(`App.handleDelete(${ country })`);
-    }
-  }
-
   return (
     <>
-    <p>Around the world... so many countries... so many languages!</p>
-    <CountriesTable countries={ countries } onDelete={ handleDelete } />
+      <Router>
+        <Routes>
+          <Route path="/" element={ <Home /> } />
+          <Route path="/countries">
+            <Route index element={ <Countries /> } />
+            <Route path=":country_code" element={ <Country /> } />
+          </Route>
+          <Route exact path="/cities" element={ <Cities /> } />
+          <Route exact path="/languages" element={ <Languages /> } />
+        </Routes>
+      </Router>
     </>
   );
 }
