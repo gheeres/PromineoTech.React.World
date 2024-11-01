@@ -24,9 +24,25 @@ function toCountry(json: any) : Country | null {
  * @returns All the countries.
  */
 export async function getAllCountries() : Promise<Country[]> {
-  const url = `${ config.baseUrl }/countries`;
-  console.log(`CountryService: Requesting all countries at ${ url }...`);
-  const response = await fetch(url);
-  const json = await response.json();
-  return json.map((j : any) => toCountry(j));
+  return new Promise<Country[]>((resolve, reject) => {
+    setTimeout(async () => {
+      const url = `${ config.baseUrl }/countries`;
+      console.log(`CountryService: Requesting all countries at ${ url }...`);
+      const response = await fetch(url);
+      const json = await response.json();
+      return resolve(json.map((j : any) => toCountry(j)));
+    }, config.delay || 0);
+  });
+  
+}
+
+export async function getCountryByCode(countryCode: string | undefined): Promise<Country | null> {
+  if (countryCode) {
+    const url = `${ config.baseUrl }/countries/${ countryCode }`;
+    console.log(`CountryService: Requesting country by code (${ countryCode }) from  ${ url }...`);
+    const response = await fetch(url);
+    const json = await response.json();
+    return toCountry(json);
+  }
+  return null;
 }

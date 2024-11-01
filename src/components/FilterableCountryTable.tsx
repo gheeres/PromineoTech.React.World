@@ -3,6 +3,7 @@ import { getAllCountries } from "../services/CountryService";
 
 import CountryTable from "./CountryTable";
 import { Country } from "../type";
+import withLoading from "./withLoading";
 
 type FilterableCountryTableProps = {
   filter?: string,   
@@ -13,10 +14,13 @@ export default function FilterableCountryTable(props: FilterableCountryTableProp
   const countrySearchId = useId();
   const [ filter, setFilter ] = useState(props.filter || '');
   const [ countries, setCountries ] = useState(props.countries || []);
+  const [ status, setStatus ] = useState('initialize');
 
   useEffect(() => {
     (async () => {
+      setStatus('loading');
       setCountries(await getAllCountries()); 
+      setStatus('loaded');
     })();
   }, [ ]);
 
@@ -27,6 +31,7 @@ export default function FilterableCountryTable(props: FilterableCountryTableProp
            filterExpression.test(c.name);
   });
 
+  const LoadingCountryTable = withLoading(CountryTable);
   return(
     <>
       <div className="form-floating mb-3">
@@ -35,7 +40,7 @@ export default function FilterableCountryTable(props: FilterableCountryTableProp
                value={ filter } />
         <label htmlFor={ countrySearchId }>Country Name</label>
       </div>
-      <CountryTable countries={ filteredCountries } autoFetch={ false } />
+      <LoadingCountryTable isLoading={ status === 'loading' } countries={ filteredCountries } autoFetch={ false } />
     </>
   );
 }

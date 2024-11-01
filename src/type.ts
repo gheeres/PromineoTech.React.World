@@ -5,3 +5,15 @@ export type Country = {
   continent: string,
   population: number, 
 };
+
+export type LatitudeLongitude = {
+  latitude: number,
+  longitude: number,
+};
+
+export type City = {
+  id: number,
+  name: string,
+  location?: LatitudeLongitude | null
+  population?: number, 
+};

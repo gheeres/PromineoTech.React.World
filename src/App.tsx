@@ -1,13 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-import FilterableCountryTable from './components/FilterableCountryTable';
+import HomePage from './pages/HomePage';
+import CountryPage from './pages/CountryPage';
 
 export default function App() {
   return (
     <>
-      <h1>Countries of the World</h1>
-      <p>Lets take a little journey...</p>
-      
-      <FilterableCountryTable />
+      <Router>
+        <Routes>
+          <Route path="/" element={ <HomePage /> } />
+          <Route path="/countries">
+            <Route path=":countryCode" element={ <CountryPage /> } />
+          </Route>
+        </Routes>
+      </Router>
     </>
   )
 }

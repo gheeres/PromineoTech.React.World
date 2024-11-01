@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllCountries } from "../services/CountryService";
 import { Country } from "../type";
+import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 type CountryTableProps = {
   autoFetch?: boolean,  
@@ -9,22 +11,27 @@ type CountryTableProps = {
 
 export default function CountryTable({ autoFetch, ...props } : CountryTableProps) {
   const [ countries, setCountries ] = useState(props.countries || []);
+  const [ status, setStatus ] = useState('initialize');
 
   useEffect(() => {
    (async () => {
-      setCountries(((autoFetch === undefined) || (autoFetch))
-                   ? (await getAllCountries())
-                   : props.countries || []);
+     setStatus('loading');
+     setCountries(((autoFetch === undefined) || (autoFetch))
+                  ? (await getAllCountries())
+                  : props.countries || []);
+     setStatus('loaded');
    })();
   }, [ props.countries ]);
 
-  const rows = countries.map(country => (
-    <tr key={ country?.code }>
-      <td>{ country?.code }</td>  
-      <td>{ country?.name }</td>  
-      <td>{ country?.population?.toLocaleString() }</td>  
-    </tr>
-  ));
+  const rows = (status === 'loading') 
+    ? <Loading />
+    : countries.map(country => (
+        <tr key={ country?.code }>
+          <td>{ country?.code }</td>  
+          <td><Link to={ `/countries/${ country.code }`} >{ country?.name }</Link></td>  
+          <td>{ country?.population?.toLocaleString() }</td>  
+        </tr>
+      ));
 
   return(
     <>
@@ -46,5 +53,5 @@ export default function CountryTable({ autoFetch, ...props } : CountryTableProps
         </tfoot>
       </table>
     </>
-  );
+  );1
 }
