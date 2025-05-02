@@ -1,43 +1,23 @@
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-//import CountryTable from './components/CountryTable';
-import { City, Country } from './types';
-import { getAllCountries } from './services/CountryService';
-import CountryDropDown from './components/CountryDropDown';
-import CityTable from './components/CityTable';
-import { getAllCitiesForCountry } from './services/CityService';
+import Home from './pages/Home'
+import Cities from './pages/Cities'
+import Countries from './pages/Countries'
+import Languages from './pages/Languages'
+import Country from './pages/Country'
 
 export default function App() {
-  const [ country, setCountry ] = useState<Country | null>();
-  const [ countries, setCountries ] = useState<Array<Country>>([]);
-  const [ cities, setCities ] = useState<Array<City>>([]);
-  
-  useEffect(() => {
-    (async () => {
-      const countries = await getAllCountries();
-      setCountries(countries);
-    })();
-  }, []);
-  useEffect(() => {
-   (async () => {
-     if (country?.code) {
-      const cities = await getAllCitiesForCountry(country.code);
-      setCities(cities);
-    }
-  })();
-  }, [ country ] )
-
-
-  function handleCountrySelected(country: Country | null, e: React.ChangeEvent<HTMLSelectElement>) {
-    setCountry(country);
-  }
-
   return (
-    <>
-      <h1>Countries of the World</h1>
-      <p>Lets take a little journey...</p>
-      <CountryDropDown countries={ countries } onCountrySelected={ handleCountrySelected } />
-      <CityTable cities={ cities } />
-    </>
+    <Router> 
+      <Routes>
+        <Route path="/" element={ <Home /> }/>
+        <Route path="/cities" element={ <Cities /> } />
+        <Route path="/countries">
+          <Route index element={ <Countries /> } />
+          <Route path=":country" element={ <Country /> } />
+        </Route>
+        <Route path="/languages" element={ <Languages /> } />
+      </Routes>
+    </Router>
   )
 }
