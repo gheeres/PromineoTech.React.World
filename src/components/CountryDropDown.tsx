@@ -3,7 +3,7 @@ import { Country } from "../types";
 
 type CountryDropDownProps = {
   countries: Country[],
-  onCountryChanged: any,
+  onCountryChanged: (country: Country,e: React.ChangeEvent<HTMLSelectElement>) => void,
 };
 
 export default function CountryDropDown({ countries, ...props }: CountryDropDownProps) {
