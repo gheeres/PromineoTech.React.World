@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Country } from "../types";
 
 type CountryTableProps = {
@@ -11,7 +12,7 @@ export default function CountryTable({ countries, ...props }: CountryTableProps)
     return (
       <tr key={ country.code }>
         <td>{ country.code }</td>
-        <td>{ country.name }</td>
+        <td><Link to={ `/countries/${ country.code }` }>{ country.name }</Link></td>
         <td>{ country.continent }</td>
         <td>{ country.population?.toLocaleString() }</td>
       </tr>

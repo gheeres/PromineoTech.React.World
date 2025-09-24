@@ -27,7 +27,8 @@ export default function CountryDropDown({ countries, ...props }: CountryDropDown
 
   return(
     <select className="form-select" onChange={ handleOnChange }>
-        { options }
+      <option value="">Select a country...</option>
+      { options }
     </select>
   ); 
 }
